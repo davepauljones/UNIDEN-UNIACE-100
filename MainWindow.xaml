@@ -1,0 +1,273 @@
+﻿<controls:MetroWindow x:Class="UNIDEN_UNIACE_100.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UNIDEN_UNIACE_100"
+        mc:Ignorable="d" 
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+        xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        Background="Transparent" Topmost="True" WindowStyle="None" BorderThickness="0" SaveWindowPosition="True"
+        ShowTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowCloseButton="False"
+        Title="MainWindow" Width="1339" Height="360" SizeToContent="Height">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="360"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 0: Your Uniden Radio Interface Canvas -->
+        <Canvas x:Name="RigCanvas" Grid.Row="0" Width="1339" Height="360" MouseDown="RigCanvas_MouseDown">
+            <Canvas.Background>
+                <ImageBrush Opacity="0.0" ImageSource="pack://application:,,,/Images/unidenuniace100.png" Stretch="None" AlignmentY="Top" AlignmentX="Left"/>
+            </Canvas.Background>
+
+            <Canvas Name="OuterBorder" Canvas.Left="0" Canvas.Top="0">
+                <Border CornerRadius="5" BorderThickness="12" BorderBrush="Silver" Width="1339" Height="360"/>
+            </Canvas>
+
+            <Canvas Name="LeftRectangle" Canvas.Left="12" Canvas.Top="12" Opacity="0.9">
+                <Rectangle Fill="Gray" Width="250" Height="336"/>
+            </Canvas>
+
+            <Canvas Name="SQBorder" Canvas.Left="72" Canvas.Top="34" Opacity="0.9">
+                <Border CornerRadius="70" BorderThickness="4" BorderBrush="Silver" Background="#66333333" Width="130" Height="130"/>
+            </Canvas>
+
+            <Canvas Name="SQText" Canvas.Left="204" Canvas.Top="126" Opacity="0.9">
+                <TextBlock Text="SQ" Foreground="Black" FontSize="26" FontWeight="Bold" FontFamily="Arial"/>
+            </Canvas>
+
+            <Canvas Name="VOLBorder" Canvas.Left="72" Canvas.Top="202" Opacity="0.9">
+                <Border CornerRadius="70" BorderThickness="4" BorderBrush="Silver" Background="#66333333" Width="130" Height="130"/>
+            </Canvas>
+
+            <Canvas Name="OFFText" Canvas.Left="32" Canvas.Top="307" Opacity="0.9">
+                <TextBlock Text="OFF" Foreground="Black" FontSize="24" FontWeight="Bold" FontFamily="Arial"/>
+            </Canvas>
+
+            <Canvas Name="VOLText" Canvas.Left="196" Canvas.Top="307" Opacity="0.9">
+                <TextBlock Text="VOL" Foreground="Black" FontSize="24" FontWeight="Bold" FontFamily="Arial"/>
+            </Canvas>
+
+            <Canvas Name="InnerBorder" Canvas.Left="258" Canvas.Top="12" Opacity="0.9">
+                <Border BorderThickness="14" BorderBrush="Silver" Width="672" Height="336"/>
+            </Canvas>
+
+            <Canvas Name="BlackRectangle" Canvas.Left="268" Canvas.Top="26" Opacity="0.4">
+                <Rectangle Fill="Black" Width="652" Height="308"/>
+            </Canvas>
+
+            <Canvas Name="InButtonSymbol" Canvas.Left="358" Canvas.Top="192" Opacity="0.9">
+                <Rectangle Canvas.Left="4" Fill="Silver" Width="14" Height="4"/>
+                <Rectangle Canvas.Top="4" Fill="Silver" Width="22" Height="2"/>
+            </Canvas>
+
+            <Canvas Name="OutButtonSymbol" Canvas.Left="358" Canvas.Top="294" Opacity="0.9">
+                <Rectangle Canvas.Left="4" Fill="Silver" Width="14" Height="12"/>
+                <Rectangle Canvas.Top="12" Fill="Silver" Width="22" Height="2"/>
+            </Canvas>
+
+            <Canvas Name="PAText" Canvas.Left="443" Canvas.Top="178" Opacity="0.9">
+                <TextBlock Text="PA" Foreground="Silver" FontSize="24" FontWeight="Bold" FontFamily="Arial"/>
+            </Canvas>
+
+            <Canvas Name="PWR4WText" Canvas.Left="550" Canvas.Top="178" Opacity="0.9">
+                <TextBlock Text="PWR 4W" Foreground="Silver" FontSize="24" FontWeight="Bold" FontFamily="Arial"/>
+            </Canvas>
+
+            <Canvas Name="ChannelText" Canvas.Left="734" Canvas.Top="178" Opacity="0.9">
+                <TextBlock Text="CHANNEL" Foreground="Silver" FontSize="24" FontWeight="Bold" FontFamily="Arial"/>
+            </Canvas>
+
+            <Canvas Name="PACBBorder" Canvas.Left="399" Canvas.Top="209" Opacity="0.2">
+                <Border CornerRadius="35" BorderThickness="2" BorderBrush="Gray" Width="120" Height="76">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="320" BlurRadius="10" ShadowDepth="3" Color="Silver"/>
+                    </Border.Effect>
+                </Border>
+            </Canvas>
+
+            <Canvas Name="PWRBorder" Canvas.Left="540" Canvas.Top="209" Opacity="0.2">
+                <Border CornerRadius="35" BorderThickness="2" BorderBrush="Gray" Width="120" Height="76">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="320" BlurRadius="10" ShadowDepth="3" Color="White"/>
+                    </Border.Effect>
+                </Border>
+            </Canvas>
+
+            <Canvas Name="PACBButton" Canvas.Left="407" Canvas.Top="215">
+                <Image Source="pack://application:,,,/Images/ChromePushButton2.png" Stretch="Fill" Width="104" Height="64"/>
+            </Canvas>
+
+            <Canvas Name="PWRButton" Canvas.Left="548" Canvas.Top="215">
+                <Image Source="pack://application:,,,/Images/ChromePushButton2.png" Stretch="Fill" Width="104" Height="64"/>
+            </Canvas>
+
+            <Canvas Name="CBText" Canvas.Left="443" Canvas.Top="286" Opacity="0.9">
+                <TextBlock Text="CB" Foreground="Silver" FontSize="24" FontWeight="Bold" FontFamily="Arial"/>
+            </Canvas>
+
+            <Canvas Name="PWR04WText" Canvas.Left="570" Canvas.Top="286" Opacity="0.9">
+                <TextBlock Text="0.4W" Foreground="Silver" FontSize="24" FontWeight="Bold" FontFamily="Arial"/>
+            </Canvas>
+
+            <Canvas Name="CB2781Border" Canvas.Left="756" Canvas.Top="237" Opacity="0.9">
+                <Border CornerRadius="35" BorderThickness="3" BorderBrush="Silver" Width="70" Height="70"/>
+            </Canvas>
+
+            <Canvas Name="CB2781CBText" Canvas.Left="773" Canvas.Top="244" Opacity="0.9">
+                <TextBlock Text="CB" Foreground="Silver" FontSize="24" FontWeight="Bold" FontFamily="Arial"/>
+            </Canvas>
+
+            <Canvas Name="CB27812781Text" Canvas.Left="764" Canvas.Top="269" Opacity="0.9">
+                <TextBlock Text="27/81" Foreground="Silver" FontSize="22" FontWeight="Bold" FontFamily="Arial"/>
+            </Canvas>
+
+            <Canvas Name="SignalMeterRectangle" Canvas.Left="317" Canvas.Top="66" Opacity="1.2">
+                <Rectangle Fill="LightGray" Width="308" Height="106"/>
+            </Canvas>
+
+            <Canvas Name="SignalMeterTemplate" Canvas.Left="318" Canvas.Top="67" Opacity="1.0" Panel.ZIndex="1">
+                <Canvas.Effect>
+                    <DropShadowEffect ShadowDepth="0.5" Direction="20" BlurRadius="2" Color="White"/>
+                </Canvas.Effect>
+                <Image Source="pack://application:,,,/Images/signalmeterclearcase.png" Stretch="Fill" Width="308" Height="106">
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="1" Direction="310" BlurRadius="3" Color="White"/>
+                    </Image.Effect>
+                </Image>
+            </Canvas>
+
+            <Canvas Name="SignalMeterBackground" Canvas.Left="326" Canvas.Top="80" Width="290" Height="80" Opacity="1.0" Background="Black">
+                <TextBlock Canvas.Left="74" Canvas.Top="0" Text="1" Foreground="ForestGreen" FontSize="18" FontWeight="Bold"/>
+                <TextBlock Canvas.Left="128" Canvas.Top="0" Text="2" Foreground="ForestGreen" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="155" Canvas.Top="0" Text="3" Foreground="ForestGreen" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="175" Canvas.Top="0" Text="4" Foreground="ForestGreen" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="200" Canvas.Top="0" Text="TX" Foreground="ForestGreen" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="232" Canvas.Top="0" Text="PWR" Foreground="ForestGreen" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                
+                <Rectangle Fill="ForestGreen" Canvas.Left="30" Canvas.Top="26" Width="50" Height="8"/>
+                <Rectangle Fill="ForestGreen" Canvas.Left="86" Canvas.Top="26" Width="45" Height="8"/>
+                <Rectangle Fill="ForestGreen" Canvas.Left="137" Canvas.Top="26" Width="18" Height="8"/>
+                <Rectangle Fill="ForestGreen" Canvas.Left="162" Canvas.Top="26" Width="17" Height="8"/>
+                <Rectangle Fill="Red" Canvas.Left="186" Canvas.Top="26" Width="70" Height="8"/>
+
+                <Rectangle Fill="ForestGreen" Canvas.Left="30" Canvas.Top="44" Width="30" Height="8"/>
+                <Rectangle Fill="ForestGreen" Canvas.Left="66" Canvas.Top="44" Width="48" Height="8"/>
+                <Rectangle Fill="ForestGreen" Canvas.Left="120" Canvas.Top="44" Width="34" Height="8"/>
+                <Rectangle Fill="ForestGreen" Canvas.Left="160" Canvas.Top="44" Width="16" Height="8"/>
+                <Rectangle Fill="ForestGreen" Canvas.Left="183" Canvas.Top="44" Width="10" Height="8"/>
+                <Rectangle Fill="Red" Canvas.Left="199" Canvas.Top="44" Width="10" Height="8"/>
+                <Rectangle Fill="Red" Canvas.Left="216" Canvas.Top="44" Width="40" Height="8"/>
+
+                <TextBlock Canvas.Left="18" Canvas.Top="52" Text="SIG" Foreground="ForestGreen" FontSize="18" FontWeight="Bold"/>
+                <TextBlock Canvas.Left="58" Canvas.Top="52" Text="1" Foreground="ForestGreen" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="112" Canvas.Top="52" Text="3" Foreground="ForestGreen" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="152" Canvas.Top="52" Text="5" Foreground="ForestGreen" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="174" Canvas.Top="52" Text="7" Foreground="ForestGreen" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="192" Canvas.Top="52" Text="9" Foreground="ForestGreen" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="204" Canvas.Top="50" Text="+" Foreground="Red" FontSize="20" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="222" Canvas.Top="52" Text="30" Foreground="Red" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+                <TextBlock Canvas.Left="248" Canvas.Top="52" Text="dB" Foreground="Red" FontSize="18" FontWeight="Bold" Opacity="0.7"/>
+            </Canvas>
+
+            <Canvas Name="SignalMeterNeedle" Canvas.Left="326" Canvas.Top="80" Width="290" Height="80" Opacity="1.0">
+                <Canvas.RenderTransform>
+                    <TranslateTransform x:Name="NeedleTranslation" X="0" />
+                </Canvas.RenderTransform>
+                <Polygon x:Name="NeedleCarrierPolygon" Points="201,2 201,4 202,4 202,2" Fill="white" Opacity="1.0"/>
+                <Polygon x:Name="NeedlePolygon" Points="200,5 200,78 203,78 203,5" Fill="GhostWhite" Opacity="1.0"/>
+            </Canvas>
+
+            <Canvas Name="SignalMeterSunburstBackground" Canvas.Left="326" Canvas.Top="80" Width="290" Height="80" Opacity="0.2" Background="LightGreen">
+                <Rectangle Width="290" Height="80">
+                    <Rectangle.Fill>
+                        <RadialGradientBrush Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                            <GradientStop Color="#001E1E24" Offset="0.2"/>
+                            <GradientStop Color="#CC1E1E24" Offset="0.7"/>
+                            <GradientStop Color="#FF1E1E24" Offset="1."/>
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Canvas>
+            
+            <Canvas Name="SignalMeterClearRectangleBackground" Canvas.Left="326" Canvas.Top="80" Width="290" Height="80" Opacity="0.1" Background="WhiteSmoke"/>
+
+            <Canvas Name="LEDDisplayRectangle" Canvas.Left="700" Canvas.Top="66" Opacity="0.1">
+                <Rectangle Fill="red" Width="182" Height="106"/>
+            </Canvas>
+
+            <Canvas Name="RightRectangle" Canvas.Left="930" Canvas.Top="12" Opacity="0.9">
+                <Rectangle Fill="Gray" Width="397" Height="336"/>
+            </Canvas>
+
+            <Canvas x:Name="SquelchKnob" Canvas.Left="70" Canvas.Top="32" Width="139" Height="140" Panel.ZIndex="1">
+                <Canvas.Effect>
+                    <DropShadowEffect Direction="0" BlurRadius="3" ShadowDepth="3" />
+                </Canvas.Effect>
+                <Image Source="pack://application:,,,/Images/SmallKnob.png" Stretch="None">
+                    <Image.Effect>
+                        <DropShadowEffect Direction="225" BlurRadius="0" ShadowDepth="3"/>
+                    </Image.Effect>
+                </Image>
+            </Canvas>
+
+            <Canvas x:Name="VolumeONOFFKnob" Canvas.Left="70" Canvas.Top="194" Width="139" Height="140"  Panel.ZIndex="1">
+                <Canvas.Effect>
+                    <DropShadowEffect Direction="0" BlurRadius="3" ShadowDepth="3" />
+                </Canvas.Effect>
+                <Image Source="pack://application:,,,/Images/SmallKnob.png" Stretch="None">
+                    <Image.Effect>
+                        <DropShadowEffect Direction="225" BlurRadius="0" ShadowDepth="3"/>
+                    </Image.Effect>
+                </Image>
+            </Canvas>
+            <Canvas x:Name="ChannelChangeKnob" Canvas.Left="1005" Canvas.Top="62" Width="243" Height="245" Panel.ZIndex="1">
+                <Canvas.Effect>
+                    <DropShadowEffect Direction="0" BlurRadius="3" ShadowDepth="3" />
+                </Canvas.Effect>
+                <Image Source="pack://application:,,,/Images/LargeKnob.png" Stretch="None">
+                    <Image.Effect>
+                        <DropShadowEffect Direction="225" BlurRadius="0" ShadowDepth="3"/>
+                    </Image.Effect>
+                </Image>
+            </Canvas>
+
+            <Canvas Name="UnidenText" Canvas.Left="1054" Canvas.Top="12" Opacity="0.9">
+                <TextBlock Text="uniden" Foreground="Black" FontSize="42" FontWeight="Bold" FontFamily="Miriam Libre"/>
+            </Canvas>
+
+            <Canvas Name="ChannelSelectorBorder" Canvas.Left="1046" Canvas.Top="100" Opacity="0.9">
+                <Border CornerRadius="80" BorderThickness="4" BorderBrush="Silver" Background="#66333333" Width="166" Height="166"/>
+            </Canvas>
+
+            <Canvas Name="TXLEDBorderBorder" Canvas.Left="1246.8" Canvas.Top="35" Opacity="0.6">
+                <Canvas.Effect>
+                    <DropShadowEffect Direction="300" BlurRadius="5" ShadowDepth="1" />
+                </Canvas.Effect>
+                <Border CornerRadius="35" BorderThickness="8" BorderBrush="Silver" Width="51" Height="51"/>
+            </Canvas>
+
+            <Canvas Name="TXLEDBorder" Canvas.Left="1258" Canvas.Top="46" Opacity="0.5">
+                <Canvas.Effect>
+                    <DropShadowEffect Direction="300" BlurRadius="3" ShadowDepth="1" />
+                </Canvas.Effect>
+                <Ellipse Fill="Red" Width="29" Height="29"/>
+            </Canvas>
+
+            <Canvas Name="LEDTXText" Canvas.Left="1259" Canvas.Top="90" Opacity="0.9">
+                <TextBlock Text="TX" Foreground="Black" FontSize="22" FontWeight="Bold" FontFamily="Miriam Libre"/>
+            </Canvas>
+
+            <Canvas Name="Uniace100Text" Canvas.Left="1030" Canvas.Top="308" Opacity="0.9">
+                <TextBlock Text="UNIACE 100" Foreground="Black" FontSize="34" FontWeight="Bold" FontFamily="Miriam Libre"/>
+            </Canvas>
+        </Canvas>
+
+        <!-- Row 1: WebView2 Control placed directly in Grid Row 1 -->
+        <!--<wv:WebView2 Grid.Row="1" x:Name="SdrWebView" Source="http://websdr.ewi.utwente.nl:8901/" Width="1339" Height="400"/>-->
+        <!--<wv:WebView2 Grid.Row="1" x:Name="SdrWebView" Source="https://www.receiverbook.org/" Width="1339" Height="420" />-->
+    </Grid>
+</controls:MetroWindow>
