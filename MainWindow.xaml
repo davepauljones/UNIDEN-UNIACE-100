@@ -8,6 +8,7 @@
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:channelDisplay="clr-namespace:UNIDEN_UNIACE_100"
         Background="Transparent" Topmost="True" WindowStyle="None" BorderThickness="0" SaveWindowPosition="True"
         ShowTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False" ShowCloseButton="False"
         Title="MainWindow" Width="1339" Height="360" SizeToContent="Height">
@@ -195,8 +196,12 @@
             
             <Canvas Name="SignalMeterClearRectangleBackground" Canvas.Left="326" Canvas.Top="80" Width="290" Height="80" Opacity="0.1" Background="WhiteSmoke"/>
 
-            <Canvas Name="LEDDisplayRectangle" Canvas.Left="700" Canvas.Top="66" Opacity="0.1">
-                <Rectangle Fill="red" Width="182" Height="106"/>
+            <Canvas Name="ChannelLEDDisplay" Canvas.Left="400" Canvas.Top="66" Opacity="0.9">
+                <local:ChannelDisplay x:Name="LargeChannelDisplay" Canvas.Left="308" Canvas.Top="0" Channel="40" Height="106"/>
+            </Canvas>
+
+            <Canvas Name="LEDDisplayRectangle" Canvas.Left="700" Canvas.Top="66" Opacity="0.2">
+                <Rectangle Fill="DarkRed" Width="182" Height="106"/>
             </Canvas>
 
             <Canvas Name="RightRectangle" Canvas.Left="930" Canvas.Top="12" Opacity="0.9">
@@ -224,11 +229,24 @@
                     </Image.Effect>
                 </Image>
             </Canvas>
-            <Canvas x:Name="ChannelChangeKnob" Canvas.Left="1005" Canvas.Top="62" Width="243" Height="245" Panel.ZIndex="1">
+            <Canvas x:Name="ChannelChangeKnob" Canvas.Left="1005" Canvas.Top="62" Width="243" Height="245" Panel.ZIndex="1"
+        Background="Transparent"
+        MouseLeftButtonDown="ChannelChangeKnob_MouseLeftButtonDown"
+        MouseMove="ChannelChangeKnob_MouseMove"
+        MouseLeftButtonUp="ChannelChangeKnob_MouseLeftButtonUp"
+        MouseWheel="ChannelChangeKnob_MouseWheel">
+
+                <!-- Canvas-level drop shadow stays completely static -->
                 <Canvas.Effect>
                     <DropShadowEffect Direction="0" BlurRadius="3" ShadowDepth="3" />
                 </Canvas.Effect>
-                <Image Source="pack://application:,,,/Images/LargeKnob.png" Stretch="None">
+
+                <!-- RotateTransform is now on the Image element -->
+                <Image Source="pack://application:,,,/Images/LargeKnob.png" Stretch="None"
+                    RenderTransformOrigin="0.5, 0.5">
+                    <Image.RenderTransform>
+                        <RotateTransform x:Name="KnobRotateTransform" Angle="0" />
+                    </Image.RenderTransform>
                     <Image.Effect>
                         <DropShadowEffect Direction="225" BlurRadius="0" ShadowDepth="3"/>
                     </Image.Effect>

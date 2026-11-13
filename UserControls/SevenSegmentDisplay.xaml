@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="UNIDEN_UNIACE_100.SevenSegmentDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UNIDEN_UNIACE_100"
+             mc:Ignorable="d" 
+             d:DesignHeight="166" d:DesignWidth="110" Background="Transparent"
+             Focusable="True"
+             KeyDown="SevenSegmentUserControl_KeyDown"
+             MouseLeftButtonDown="SevenSegmentUserControl_MouseLeftButtonDown"
+             MouseWheel="SevenSegmentUserControl_MouseWheel"
+             MouseLeave="SevenSegmentUserControl_MouseLeave">
+
+    <!-- 1. Just add this Viewbox tag here -->
+    <Viewbox Stretch="Uniform">
+
+        <Canvas x:Name="SevenSegmentCanvas" Width="110" Height="160">
+            <Canvas.RenderTransform>
+                <SkewTransform AngleX="-7" CenterX="50" CenterY="80"/>
+            </Canvas.RenderTransform>
+
+            <Canvas.Resources>
+                <SolidColorBrush x:Key="SegmentOnBrush" Color="Red"/>
+                <SolidColorBrush x:Key="SegmentOffBrush" Color="#333333"/>
+
+                <Style TargetType="Polygon">
+                    <Setter Property="Fill" Value="{StaticResource SegmentOnBrush}"/>
+                    <Setter Property="Stroke" Value="{StaticResource SegmentOnBrush}"/>
+                    <Setter Property="StrokeThickness" Value="0"/>
+                    <Setter Property="StrokeLineJoin" Value="Round"/>
+                </Style>
+            </Canvas.Resources>
+
+            <Polygon x:Name="SegmentA" Points="11.5,10  88.5,10  70.5,28  29.5,28" />
+            <Polygon x:Name="SegmentF" Points="10,11  28,29  28,69  10,82" />
+            <Polygon x:Name="SegmentB" Points="90,11  90,82  72,69  72,29" />
+            <Polygon x:Name="SegmentG" Points="13,82  29,70  71,70  87,82  71,94  29,94" />
+            <Polygon x:Name="SegmentE" Points="10,82  28,95  28,138.5  10,156.5" />
+            <Polygon x:Name="SegmentC" Points="90,82  90,156.5  72,139.5  72,95.5" />
+            <Polygon x:Name="SegmentD" Points="29,140  70.5,140  89,158  11.5,158" />
+
+            <Ellipse x:Name="SegmentDot" Canvas.Left="94" Canvas.Top="144" Width="14" Height="14" 
+                         Fill="{StaticResource SegmentOnBrush}"/>
+        </Canvas>
+
+    </Viewbox>
+    <!-- 2. Close the Viewbox tag here -->
+</UserControl>
